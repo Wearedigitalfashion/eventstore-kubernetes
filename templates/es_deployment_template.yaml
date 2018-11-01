@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: es-${nodenumber}
+  name: sku-events-prod-${nodenumber}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: es-${nodenumber}
-        escluster: es
+        app: eventstore-${nodenumber}
+        escluster: eventstore-prod
     spec:
       containers:
-        - name: es-${nodenumber}
-          image: "eventstore/eventstore"
+        - name: eventstore-${nodenumber}
+          image: "eventstore/eventstore:release-4.1.1"
           env: 
             - name: EVENTSTORE_INT_IP
               valueFrom:
@@ -33,7 +33,7 @@ spec:
             - name: EVENTSTORE_CLUSTER_SIZE
               value: "${nodecount}"
             - name: EVENTSTORE_CLUSTER_DNS
-              value: "es.default.svc.cluster.local"
+              value: "sku-eventstore-prod-service.default.svc.cluster.local"
             - name: EVENTSTORE_CLUSTER_GOSSIP_PORT
               value: "2114"
             - name: EVENTSTORE_GOSSIP_ALLOWED_DIFFERENCE_MS
@@ -51,11 +51,12 @@ spec:
             - containerPort: 2114
             - containerPort: 1111
             - containerPort: 1112
+            - containerPort: 2116
           volumeMounts:
             - mountPath: "/usr/data/eventstore"
               name: espd
       volumes:
         - name: espd
           gcePersistentDisk:
-            pdName: esdisk-${nodenumber}
+            pdName: sku-eventstore-prod-disk-${nodenumber}
             fsType: ext4

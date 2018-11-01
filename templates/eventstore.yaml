@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "sku-eventstore-prod-service"
+spec:
+  selector:
+    escluster: "eventstore-prod"
+  ports:
+    - name: ext-http-port
+      protocol: "TCP"
+      port: 2113
+      targetPort: 2113
+    - name: int-http-port
+      protocol: "TCP"
+      port: 2114
+      targetPort: 2114
+    - name: int-tcp-port
+      protocol: "TCP"
+      port: 1111
+      targetPort: 1111
+    - name: ext-tcp-port
+      protocol: "TCP"
+      port: 1112
+      targetPort: 1112
+  clusterIP: None
