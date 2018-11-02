@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: "sku-eventstore-prod-service"
+  name: "sku-eventstore-${environment}-service"
 spec:
   selector:
-    escluster: "eventstore-prod"
+    escluster: "eventstore-${environment}"
   ports:
     - name: ext-http-port
       protocol: "TCP"
