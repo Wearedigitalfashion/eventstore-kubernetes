@@ -61,7 +61,7 @@ function createDisks {
         do
             if ! gcloud compute disks list sku-eventstore-$2-disk-$c | grep sku-eventstore-$2-disk-$c; then
                 echo "creating disk: sku-eventstore-$2-disk-$c" 
-                gcloud compute disks create --size=80GB sku-eventstore-$2-disk-$c --zone europe-west2-a
+                gcloud compute disks create --size=500GB sku-eventstore-$2-disk-$c --zone europe-west2-a
             else
                 echo "disk already exists: sku-eventstore-$2-disk-$c"
             fi
