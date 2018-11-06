@@ -23,3 +23,17 @@ spec:
       port: 1112
       targetPort: 1112
   clusterIP: None
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: "sku-eventstore-${environment}-public-service"
+# spec:
+#   selector:
+#     escluster: "eventstore-${environment}"
+#   ports:
+#     - name: ext-http-port
+#       protocol: "TCP"
+#       port: 2113
+#       targetPort: 2113
+#   type: LoadBalancer
