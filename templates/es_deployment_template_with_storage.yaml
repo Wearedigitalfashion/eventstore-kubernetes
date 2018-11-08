@@ -13,6 +13,13 @@ spec:
       containers:
         - name: eventstore-${nodenumber}
           image: "eventstore/eventstore:release-4.1.1"
+          livenessProbe:
+                    httpGet:
+                      path: /ping
+                      port: 2114
+                    initialDelaySeconds: 60
+                    timeoutSeconds: 5
+                    periodSeconds: 5
           env: 
             - name: EVENTSTORE_INT_IP
               valueFrom:
